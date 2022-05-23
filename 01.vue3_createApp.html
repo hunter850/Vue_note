@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p>{{test[1]}}</p>
+    </div>
+
+    <script
+        src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.36/vue.global.min.js'
+        integrity='sha512-7fBl0n0dAr8K4+U/VjSXcNuon/OqYgWY00A7g6VVppvYS6IQ22phO9DAbbFrur4YRWi9GnrntLJpFTrYRbqPuA=='
+        crossorigin='anonymous'
+    ></script>
+    <script>
+        //把data提出來用函式呈現
+        let data = () => {
+            a = 10;
+            b = 3
+            c = 29;
+            return {
+                    test: [a, b, c],
+                    //小心 若value為函式 不要用箭頭函式 傳統函式的this會指向vue 但箭頭函式的會指向window
+                    f1: function () {
+                        console.log(this);
+                    },
+                    f2: () => {
+                        console.log(this);
+                    },
+                }
+        }
+        const vm = Vue.createApp({
+            data
+        }).mount("#app");
+    </script>
+    <!-- 官方寫法 -->
+    <!-- <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                a = 10;
+                b = 3
+                c = 29;
+                return {
+                    test: [a, b, c]
+                }
+            }
+        }).mount("#app");
+    </script> -->
+</body>
+</html>
