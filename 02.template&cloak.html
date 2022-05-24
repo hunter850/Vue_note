@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="a0">
+        <div id="section1">
+            <span>data1</span>
+            <span>data2</span>
+            <span>data3</span>
+            <span>data4</span>
+            <span>data5</span>
+            <span>data6</span>
+            <span>data7</span>
+            <span>data8</span>
+            <span>data9</span>
+            <span>data10</span>
+        </div>
+        <div id="section2">
+            <span>data1</span>
+            <span>data2</span>
+            <span>data3</span>
+            <span>data4</span>
+            <span>data5</span>
+            <span>data6</span>
+            <span>data7</span>
+            <span>data8</span>
+            <span>data9</span>
+            <span>data10</span>
+        </div>
+        <div id="section3">
+            <span>data1</span>
+            <span>data2</span>
+            <span>data3</span>
+            <span>data4</span>
+            <span>data5</span>
+            <span>data6</span>
+            <span>data7</span>
+            <span>data8</span>
+            <span>data9</span>
+            <span>data10</span>
+        </div>
+        <div id="section4">
+            <span>data1</span>
+            <span>data2</span>
+            <span>data3</span>
+            <span>data4</span>
+            <span>data5</span>
+            <span>data6</span>
+            <span>data7</span>
+            <span>data8</span>
+            <span>data9</span>
+            <span>data10</span>
+        </div>
+        <!-- v-cloak搭配css的選擇器[v-cloak]設定display: none 可以讓尚未讀取完vue的區塊不顯示 讀完vue才顯示 這樣才不會看到{{key}} -->
+        <div id="section5" v-cloak>
+            <p>{{company}} 版權所有 {{year}}建議瀏覽器 chrome / edge10/1起關閉支援TLS1.1</p>
+            <p>{{new Date().getFullYear()}}</p>
+            <p>{{ copyright }}</p>
+        </div>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.33/vue.global.js'
+        integrity='sha512-6hAH/P3ozP8sS7eyTnGELBU9FJfjiu7NHaPTm3vTXphZFveVWCZsdyiqbC/lCUVqC5+GvEOg153d5f9t+8VIkQ=='
+        crossorigin='anonymous'>
+    </script>
+
+    <script>
+        const apple = "轉載";
+        const vm = Vue.createApp ({
+            data() {
+                return {
+                    copyright: `版權所有 ${apple}必究`,
+                    company: "xxx資訊科技股份有限公司",
+                    year: "© " + new Date().getFullYear(),
+                }
+            }
+            //可以選擇只掛載在部分區塊
+        }).mount('#section5');
+    </script>
+</body>
+
+</html>
