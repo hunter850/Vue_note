@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+        {{nameChange}}
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.33/vue.global.js'
+        integrity='sha512-6hAH/P3ozP8sS7eyTnGELBU9FJfjiu7NHaPTm3vTXphZFveVWCZsdyiqbC/lCUVqC5+GvEOg153d5f9t+8VIkQ=='
+        crossorigin='anonymous'>
+    </script>
+    <script>
+        const vm = Vue.createApp({
+            data () {
+                return {
+                    firstName: "Foo",
+                    lastName: "Bar",
+                    fullName: "Foo Bar"
+                }
+            },
+            computed: {
+                nameChange: function() {
+                    //可以只靠一行監聽兩個或以上的值是否有變動
+                    console.log("fullName");
+                    return this.firstName + " " + this.lastName;
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
