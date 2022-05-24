@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <!-- 加了v-once就只會render第一次 比如在console把vm.msg改成123 就只有第二個p會改第一個維持hello vue -->
+        <p v-once>{{msg}}</p>
+        <p>{{msg}}</p>
+
+        <br><br>
+
+        <p>{{myHTML}}</p>
+        <p>{{myHTML}}216546</p>
+        <p v-text="myHTML">216546</p>
+        <p v-html="myHTML">216546</p>
+
+        <br><br>
+
+        <p>{{number + 1}}</p>
+        <p>{{temp ? "YES" : "NO"}}</p>
+        <p>{{message.split("").reverse().join("")}}</p>
+
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.33/vue.global.js'
+        integrity='sha512-6hAH/P3ozP8sS7eyTnGELBU9FJfjiu7NHaPTm3vTXphZFveVWCZsdyiqbC/lCUVqC5+GvEOg153d5f9t+8VIkQ=='
+        crossorigin='anonymous'>
+    </script>
+
+    <script type="text/x-template" id="page-template">
+        <span style="color: red">This should be {{msg}}.</span>
+    </script>
+    
+    <script>
+        const vm = Vue.createApp({
+            data () {
+                return {
+                    msg: "hello vue",
+                    myHTML: `<span style="color: red">This should be red.</span>`,
+                    temp: false,
+                    number: 10,
+                    message: "message"
+                }
+            },
+            //template優先於原本內容 且為完整HTML 並且{{msg}} 也能吃到data內的hello vue
+            // template: `<span style="color: red">This should be {{msg}}.</span>`,
+            
+            //template也能用id指定給script tag 再在script tag裡打html
+            //template: "#page-template",
+        }).mount("#app");
+        
+        /*
+        Vue的白名單 即Vue的template可辨認的全域方法
+        'Infinity,undefined,NaN,isFinite,isNaN,parseFloat,parseInt,decodeURI,'
+        'decodeURIComponent,encodeURI,encodeURIComponent,Math,Number,Date,Array,'
+        'Object,Boolean,String,RegExp,Map,Set,JSON,Intl,BigInt'
+        */
+    </script>
+</body>
+</html>
