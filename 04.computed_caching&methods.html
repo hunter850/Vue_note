@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+        computed: {{reverseMessage}}
+        <br><br>
+        methods: {{reverseMsg()}}
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.33/vue.global.js'
+        integrity='sha512-6hAH/P3ozP8sS7eyTnGELBU9FJfjiu7NHaPTm3vTXphZFveVWCZsdyiqbC/lCUVqC5+GvEOg153d5f9t+8VIkQ=='
+        crossorigin='anonymous'>
+    </script>
+    <script>
+        const vm = Vue.createApp({
+            data () {
+                return {
+                    message: "hello",
+                }
+            },
+            //computed執行完計算 如果原始資料沒有更動 值就會一直存在vm.reverseMessage 若message的值更動了reverseMessage就會再跑一次function
+            computed: {
+                //沒有render 所以會在呼叫時才跑function 先呼叫m1再呼叫m2 console順序m1 m2
+                //若先呼叫m2會直接console出 m2 m1
+                //若有render m1 m2皆會跳console且會依照程式上到下的順序console 不會因為先影響誰就先console誰
+                //若message沒有更動 則Date.now()也不會更動 每次呼叫的Date.now()值都相同
+                m1() {
+                    console.log("m1");
+                    return this.message + 1 + Date.now();
+                },
+                m2() {
+                    console.log("m2");
+                    return this.m1 + 1;
+                },
+                reverseMessage: function () {
+                    console.log("computed");
+                    return this.message.split("").reverse().join("");
+                }
+            },
+            //methods若有render在螢幕上的每次呼叫都會執行一次funciton 所以每次都會console.log一次 改message也會呼叫一次
+            methods: {
+                reverseMsg() {
+                    console.log("methods");
+                    //每次呼叫Date.now()都會不斷變動
+                    return this.message.split("").reverse().join("") + Date.now();
+                },
+                //reverseMsg2()沒有render在畫面上 所以改message也不會跳console.log 等到呼叫時才執行
+                reverseMsg2() {
+                    console.log("methods2");
+                    return this.message.split("").reverse().join("");
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
