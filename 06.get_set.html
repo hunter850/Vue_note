@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+        {{fullName}}
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.33/vue.global.js'
+        integrity='sha512-6hAH/P3ozP8sS7eyTnGELBU9FJfjiu7NHaPTm3vTXphZFveVWCZsdyiqbC/lCUVqC5+GvEOg153d5f9t+8VIkQ=='
+        crossorigin='anonymous'>
+    </script>
+    <script>
+        const vm = Vue.createApp({
+            data () {
+                return {
+                    firstName: "John",
+                    lastName: "Wick"
+                }
+            },
+            computed: {
+                fullName: {
+                    get() {
+                        console.log("fullName");
+                        return this.firstName + " " + this.lastName;
+                    },
+                    set(val) {
+                        [this.firstName, this.lastName] = val.split(" ");
+                    }
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
