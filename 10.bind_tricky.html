@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .zzz {
+            color: red !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- href只能有一種的屬性一律以第一個 -->
+        <!-- class會合併 -->
+        <!-- style重複的以綁定的為優先(綁定也優先於inline的!important 但class的css有下!important會優先於vue和inline) 其他沒有重複的全都保留 -->
+        <!-- bind一定會先把重複的inline移除改成bind -->
+        <!-- 拔完後inline !important > css !important > inline > css -->
+        <a href="###" :href="href" href="#" :target="target" class="aaa zzz" :class="myClass" style="color: purple !important;background-color: yellow;" :style="myStyle">
+            {{content}}
+        </a>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.33/vue.global.js'
+        integrity='sha512-6hAH/P3ozP8sS7eyTnGELBU9FJfjiu7NHaPTm3vTXphZFveVWCZsdyiqbC/lCUVqC5+GvEOg153d5f9t+8VIkQ=='
+        crossorigin='anonymous'>
+    </script>
+    <script>
+        const vm = Vue.createApp({
+            data () {
+                return {
+                    href: "https://www.google.com.tw/",
+                    target: "_blank",
+                    content: "google",
+                    myClass: {
+                        aaa: true,
+                        bbb: true,
+                        ccc: true,
+                    },
+                    myStyle: {
+                        color: "green",
+                        fontSize: "48px",
+                    }
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
