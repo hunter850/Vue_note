@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            color: green;
+        }
+        .text-danger {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <a :href="href" :target="target" :class="[activeClass, errorClass]">
+            {{content}}
+        </a>
+        <br>
+        <a :href="href" :target="target" :class="isActive ? activeClass : errorClass">
+            {{content}}
+        </a>
+        <br>
+        <a :href="href" :target="target" :class="[isActive ? activeClass : errorClass]">
+            {{content}}
+        </a>
+        <br>
+        <a :href="href" :target="target" :class="[{active: isActive}, errorClass]">
+            {{content}}
+        </a>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.33/vue.global.js'
+        integrity='sha512-6hAH/P3ozP8sS7eyTnGELBU9FJfjiu7NHaPTm3vTXphZFveVWCZsdyiqbC/lCUVqC5+GvEOg153d5f9t+8VIkQ=='
+        crossorigin='anonymous'>
+    </script>
+    <script>
+        const vm = Vue.createApp({
+            data () {
+                return {
+                    href: "https://www.google.com.tw/",
+                    target: "_blank",
+                    content: "google",
+                    activeClass: "active",
+                    errorClass: "text-danger",
+                    isActive: true,
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
