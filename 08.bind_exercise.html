@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            color: green;
+        }
+        .text-danger {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <a :href="link" :target="target" :class="classObj">
+            {{content}}
+        </a>
+    </div>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.33/vue.global.js'
+        integrity='sha512-6hAH/P3ozP8sS7eyTnGELBU9FJfjiu7NHaPTm3vTXphZFveVWCZsdyiqbC/lCUVqC5+GvEOg153d5f9t+8VIkQ=='
+        crossorigin='anonymous'>
+    </script>
+    <script>
+        const vm = Vue.createApp({
+            data () {
+                return {
+                    link: "https://www.google.com.tw/",
+                    target: "_blank",
+                    content: "google",
+                    isActive: true,
+                    error: null,
+                }
+            },
+            computed: {
+                classObj() {
+                    return {
+                        //active就會有綠色 但只要有error一定都會是紅色
+                        active: this.isActive && !this.error,
+                        "text-danger": this.error === true,
+                    }
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
