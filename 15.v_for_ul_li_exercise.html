@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="nav of navbar">
+                <span>
+                    {{nav.item}}
+                </span>
+                <ul>
+                    <li v-for="li of nav.list">
+                        {{li.content}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+    <script src="./js/vue.global.js"></script>
+    <script>
+        const vm = Vue.createApp({
+            data () {
+                return {
+                    navbar: [
+                        {
+                            item: "遊戲",
+                            list: [
+                                {content: "關於"},
+                                {content: "地圖"}
+                            ]
+                        },
+                        {item: "英雄"},
+                        {
+                            item: "活動",
+                            list: [
+                                {content: "周年紀念"},
+                                {content: "夏季運動會"},
+                                {content: "萬聖節驚魂"},
+                                {content: "冬境樂園"},
+                                {content: "春節活動"},
+                                {content: "捍衛密令"},
+                            ]
+                        },
+                        {item: "媒體"},
+                        {
+                            item: "最新消息",
+                            list: [
+                                {content: "最新消息"},
+                                {content: "更新檔"},
+                                {content: "公測"},
+                            ]
+                        },
+                    ]
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
