@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+        <template v-if="loginType === 'username'" :key="username._id">
+            <label>username</label>
+            <br><br>
+            <input placeholder="Enter your username" type="text">
+            <br><br>
+        </template>
+        <template v-else :key="email._id">
+            <label>Email</label>
+            <br><br>
+            <input placeholder="Enter your email address" type="text">
+            <br><br>
+        </template>
+        <button @click="toggle()">Toggle login type</button>
+    </div>
+
+    <script src="./js/vue.global.js"></script>
+    <script>
+        /*
+            Generally speaking, v-if has higher toggle costs while v-show has higher initial render costs.
+            So prefer v-show if you need to toggle something very often,
+            and prefer v-if if the condition is unlikely to change at runtime.
+        */
+        const vm = Vue.createApp({
+            data () {
+                return {
+                    loginType: "username",
+                }
+            },
+            methods: {
+                toggle() {
+                    this.loginType = this.loginType === "username" ?  "email" : "username";
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
