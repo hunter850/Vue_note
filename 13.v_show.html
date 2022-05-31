@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-show是用display: none 不會拔除DOM -->
+        <h1 v-show="show">
+            {{content}}
+        </h1>
+        <button @click="change()">click</button>
+    </div>
+    
+    <script src="./js/vue.global.js"></script>
+    <script>
+        const vm = Vue.createApp({
+            data () {
+                return {
+                    content: "hello world",
+                    show: false,
+                }
+            },
+            methods: {
+                change() {
+                    this.show = !this.show;
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
