@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- v-if v-else必須兩個打在一起 中間不能有其他DOM -->
+        <template v-if="show">
+            <h1>Hello Vue</h1>
+            <span>Description</span>
+        </template>
+        <template v-else>
+            <h1>XXX</h1>
+            <span>Description</span>
+        </template>
+        <br>
+        <template v-if="Math.random() > 0.5">
+            <h1>Random if</h1>
+        </template>
+        <template v-else>
+            <h1>Random else</h1>
+        </template>
+        <br><br>
+
+        <div v-if="type === 'A'">
+            A Content
+          </div>
+          <div v-else-if="type === 'B'">
+            B Content
+          </div>
+          <div v-else-if="type === 'C'">
+            C Content
+          </div>
+          <div v-else>
+            No Content
+          </div>
+          <div>
+              {{content}}
+          </div>
+    </div>
+
+    <script src="./js/vue.global.js"></script>
+    <script>
+        const dataMapping = {
+            A: "A Content",
+            B: "B Content",
+            C: "C Content",
+        }
+        const vm = Vue.createApp({
+            data () {
+                return {
+                    show: true,
+                    type: "D",
+                }
+            },
+            computed: {
+                content() {
+                    return dataMapping[this.type] || "No Content";
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
