@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .pointer {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            <input type="text" v-model="name" @keyup.enter="addItem()" />
+            <button @click="addItem()">添加</button>
+        </div>
+        <ul>
+            <!-- 把:key拿掉 先點選蘋果再增加選項 原本點的蘋果會改點在新的選項上 -->
+            <li v-for="fruit of list" :key="fruit.id">
+                <label :style="myStyle">
+                    <input type="checkbox" />
+                    {{fruit.name}}
+                </label>
+            </li>
+        </ul>
+    </div>
+
+    <script src="./js/vue.global.js"></script>
+    <script>
+        /*
+            更改v-for使用的Array盡量只使用以下function
+            push()
+            pop()
+            shift()
+            unshift()
+            splice()
+            sort()
+            reverse()
+        */
+        const vm = Vue.createApp({
+            data() {
+                return {
+                    name: "",
+                    newId: 3,
+                    list: [
+                        { id: 1, name: "蘋果" },
+                        { id: 2, name: "香蕉" },
+                        { id: 3, name: "鳳梨" },
+                    ],
+                    myStyle: {
+                        cursor: "pointer",
+                    }
+                }
+            },
+            methods: {
+                addItem() {
+                    let regexp = /^(?!(\s+$))/;
+                    if (this.name === "" || !regexp.test(this.name)) {
+                        this.name = "";
+                    } else {
+                        this.list.unshift({ id: ++this.newId, name: this.name });
+                    }
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
