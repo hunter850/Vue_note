@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 可以用v-for搭配v-show 但不要v-for搭配v-if 因為v-for就製作出DOM了 又v-if拔掉吃了兩次效能 但用v-show純粹隱藏 通常拿來做輪播之類的效果 是OK的 -->
+        <!-- 若真的要只做出male的DOM 則應該要用computed算出新的陣列再拿來v-for -->
+        <h1 v-for="person of nameList" v-show="person.gender === 'female'">
+            {{person.name}}
+        </h1>
+        <hr>
+        <h1 v-for="person of maleList">
+            {{person.name}}
+        </h1>
+
+    </div>
+
+    <script src="./js/vue.global.js"></script>
+    <script>
+        const vm = Vue.createApp({
+            data() {
+                return {
+                    nameList: [
+                        { name: "Alex", gender: "male" },
+                        { name: "Sara", gender: "female" },
+                        { name: "Frank", gender: "male" },
+                        { name: "Ben", gender: "male" },
+                        { name: "Amy", gender: "female" },
+                        { name: "Alice", gender: "female" },
+                        { name: "David", gender: "male" },
+                    ]
+                }
+            },
+            computed: {
+                maleList() {
+                    return this.nameList.filter((person) => {
+                        return person.gender === "male";
+                    })
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
