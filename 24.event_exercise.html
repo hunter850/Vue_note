@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button v-for="(content,index) of contents" @click="clickHandler" :data-index="index">
+            {{index + 1}}
+        </button>
+        <br><br>
+        <button v-for="(content,index) of contents" @click="clickHandler2(index)" :data-index="index">
+            {{index + 1}}
+        </button>
+        <!-- 開element面板可以看到h1也在閃爍 所以h1也被抽換 如果要多次切換應該做出四個h1 然後用v-show顯示 -->
+        <h1>
+            抽換h1: {{contents[count]}}
+        </h1>
+
+        <h1 v-for="(content,index) of contents" v-show="count === index">
+            v-show: {{content}}
+        </h1>
+    </div>
+
+    <script src="./js/vue.global.js"></script>
+    <script>
+        const vm = Vue.createApp({
+            data () {
+                return {
+                    count: 0,
+                    total: 4,
+                    contents: ["第一頁", "第二頁", "第三頁", "第四頁"]
+                }
+            },
+            methods: {
+                //兩種寫法都可以 但第二種較貼近大家的寫法
+                clickHandler() {
+                    //注意event.target.dataset.index的data-index讀出來的是字串 且event會自動傳入
+                    this.count = parseInt(event.target.dataset.index);
+                },
+                clickHandler2(index) {
+                    this.count = index;
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>
