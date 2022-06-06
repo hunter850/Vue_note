@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <!-- 
+        .stop event.stopPropagation()
+        .prevent event.preventDefault()
+        .capture addEventListener("event", handler, true) 監聽前面
+        .self 只有自己本身被點到才會觸發 不會靠bubbling觸發
+        .left 左鍵
+        .right 右鍵
+        .middle 中鍵
+        .once 只會觸發一次
+     -->
+    <div id="app">
+        <div :style="boxStyle" @click="messageHello">
+            {{content}}
+            <div :style="myStyle" @click="messageHello">
+                {{content}}
+                <div :style="myStyle" @click="messageHello">
+                    {{content}}
+                    <div :style="myStyle" @click="messageHello">
+                        {{content}}
+                        <div :style="myStyle" @click.stop="messageHello">
+                            {{content}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><hr>
+        <!-- 防止submit重新刷新頁面 -->
+        <form @submit.prevent>
+            <input type="text" name="text">
+            <input type="submit" @click="messageHello(),messageA(),messageEvent()"></input>
+        </form>
+    </div>
+
+    <script src="./js/vue.global.js"></script>
+    <script src="./js/jquery-3.6.0.js"></script>
+    <script>
+        const vm = Vue.createApp({
+            data() {
+                return {
+                    content: "hello",
+                    boxStyle: {
+                        width: "80%",
+                        height: "80vh",
+                        backgroundColor: "#faa",
+                        position: "relative",
+                    },
+                    myStyle: {
+                        width: "80%",
+                        height: "80%",
+                        backgroundColor: "#faf",
+                        position: "absolute",
+                        right: "0px",
+                        bottom: "0px",
+                        outline: "1px solid red",
+
+                    }
+                }
+            },
+            methods: {
+                messageHello() {
+                    console.log("hello");
+                },
+                messageA() {
+                    console.log("a");
+                },
+                messageEvent() {
+                    console.log(event.eventPhase);
+                },
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
