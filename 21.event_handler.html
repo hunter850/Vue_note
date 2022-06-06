@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- inline handler -->
+        <!-- 相當於addEventListener的click事件 -->
+        <button @click="count++">
+            inline count++
+        </button>
+        <br><hr>
+        <button @click="addOne">
+            methods count++
+        </button>
+        <br><hr>
+        <button @click="greet">
+            greet
+        </button>
+        <h1>
+            {{count}}
+        </h1>
+    </div>
+
+    <script src="./js/vue.global.js"></script>
+    <script>
+        const vm = Vue.createApp({
+            data() {
+                return {
+                    name: "Vue",
+                    count: 0,
+                }
+            },
+            methods: {
+                addOne() {
+                    return this.count++;
+                },
+                greet(event) {
+                        console.log(event)
+                }
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
