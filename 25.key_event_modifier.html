@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body style="height: 2000px;">
+    <div id="app">
+        <!-- alt + 左鍵才會觸發 -->
+        <!-- 不加exact 按ctrl+其他按鍵+左鍵仍然會觸發 但加了exact 按了其他鍵 ctrl左鍵也不會觸發 -->
+        <button @click.left.ctrl.exact="messageHello">
+            {{content}}
+        </button>
+        <form @submit.prevent>
+            <!-- 改用鍵盤事件的event.code的字串名當modifier 並把駝峰命名改成全小寫用dash連接 英文字用單一個字母
+                print screen只能keyup 符號的幾乎都試不出來 有明確名稱的和funciton鍵 英文 數字都可以-->
+            <input type="text" @keydown="messageKey">
+        </form>
+    </div>
+
+    <script src="./js/vue.global.js"></script>
+    <script>
+        /*
+        Key Aliases#
+        Vue provides aliases for the most commonly used keys:
+
+        .enter
+        .tab 無法keyup
+        .delete (captures both "Delete" and "Backspace" keys)
+        .esc
+        .space
+        .up
+        .down
+        .left
+        .right
+
+        .ctrl 無法keyup
+        .alt 無法keyup
+        .shift 無法keyup
+        .meta 無法keyup
+        */
+        const vm = Vue.createApp({
+            data() {
+                return {
+                    content: "click",
+                }
+            },
+            methods: {
+                messageHello() {
+                    console.log("hello");
+                },
+                messageValue(event) {
+                    console.log(event.target);
+                },
+                messageKey() {
+                    //可以用event.keyCode 數字來判斷按下哪顆鍵
+                    //可以用event.code 字串來判斷按下哪顆鍵
+                    console.log(event);
+                },
+                resizeHandler() {
+                    console.log(1);
+                },
+                scrollHandler() {
+                    console.log(1); 
+                }
+            },
+            mounted() {
+                window.addEventListener("resize", this.resizeHandler);
+                window.addEventListener("scroll", this.scrollHandler);
+            },
+            //mounted可以 但不知道怎麼destroy拔掉EventListener
+            beforeUnmount() {
+                window.removeEventListener("resize", this.resizeHandler);
+                window.removeEventListener("scroll", this.scrollHandler);
+            }
+        }).mount("#app");
+    </script>
+</body>
+
+</html>
